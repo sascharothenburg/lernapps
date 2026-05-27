@@ -834,47 +834,6 @@ link.rel='manifest'; link.href=url;
 document.head.appendChild(link);
 </script>
 
-<div id="pp-widget" style="position:fixed;bottom:calc(90px + env(safe-area-inset-bottom,0px));right:16px;left:auto;z-index:99999;font-family:Nunito,sans-serif">
-  <div id="pp-panel" style="display:none;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);margin-bottom:10px;width:220px;animation:ppSlideUp .25s ease;align-self:flex-end">
-    <div style="font-weight:900;font-size:.95rem;color:#1e1b4b;text-align:center">&#x2615; Buy me a Coffee</div>
-    <div style="font-size:.75rem;color:#6b7280;text-align:center">Betrag w&auml;hlen:</div>
-    <div style="display:flex;gap:6px;justify-content:center">
-      <button onclick="ppPay(1)"  class="pp-amt">1 &euro;</button>
-      <button onclick="ppPay(2)"  class="pp-amt pp-sel">2 &euro;</button>
-      <button onclick="ppPay(5)"  class="pp-amt">5 &euro;</button>
-      <button onclick="ppPay(10)" class="pp-amt">10 &euro;</button>
-    </div>
-    <div style="display:flex;gap:6px;align-items:center">
-      <input id="pp-custom" type="number" min="1" max="999" placeholder="Eigener Betrag"
-        style="flex:1;padding:7px 10px;border:2px solid #e2e8f0;border-radius:10px;font-family:Nunito,sans-serif;font-size:.82rem;font-weight:600;color:#1e1b4b;outline:none;width:100%"
-        oninput="ppSelectCustom(this.value)">
-      <span style="font-size:.82rem;color:#6b7280;flex-shrink:0">&euro;</span>
-    </div>
-    <a id="pp-go" href="https://paypal.me/SaschaRothenburg/2EUR" target="_blank"
-      style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:12px;background:#0070ba;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,112,186,.35)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c1.379 8.741-5.832 9.76-8.084 9.76H9.942L8.684 23h3.603c.458 0 .848-.333.92-.786l.038-.199.733-4.64.047-.256a.932.932 0 0 1 .92-.786h.579c3.754 0 6.694-1.525 7.552-5.933.36-1.847.174-3.389-.854-4.483z"/></svg>
-      Jetzt <span id="pp-label">2 &euro;</span> spenden
-    </a>
-    <div style="font-size:.65rem;color:#94a3b8;text-align:center">via PayPal &middot; Freunde &amp; Familie = 0% Geb&uuml;hren</div>
-  </div>
-  <button id="pp-btn" onclick="ppToggle()" style="display:flex;align-items:center;gap:8px;padding:11px 20px;border-radius:50px;border:none;background:#0070ba;color:#fff;font-family:Nunito,sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(0,112,186,.45);transition:transform .15s">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c1.379 8.741-5.832 9.76-8.084 9.76H9.942L8.684 23h3.603c.458 0 .848-.333.92-.786l.038-.199.733-4.64.047-.256a.932.932 0 0 1 .92-.786h.579c3.754 0 6.694-1.525 7.552-5.933.36-1.847.174-3.389-.854-4.483z"/></svg>
-    Buy me a Coffee &#x2615;
-  </button>
-</div>
-<style>
-.pp-amt{flex:1;padding:7px 4px;border-radius:10px;border:2px solid #e2e8f0;background:#f8fafc;font-family:Nunito,sans-serif;font-size:.82rem;font-weight:800;color:#1e1b4b;cursor:pointer;transition:all .15s}
-.pp-amt.pp-sel{background:#0070ba;color:#fff;border-color:#0070ba}
-.pp-amt:hover{border-color:#0070ba}
-@keyframes ppSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-</style>
-<script>
-var ppAmount=2,ppOpen=false;
-function ppToggle(){ppOpen=!ppOpen;var p=document.getElementById('pp-panel');p.style.display=ppOpen?'flex':'none';document.getElementById('pp-btn').style.transform=ppOpen?'scale(.95)':'scale(1)';}
-function ppPay(amt){ppAmount=amt;ppUpdateLink();document.querySelectorAll('.pp-amt').forEach(function(b){b.classList.remove('pp-sel');if(b.textContent.trim()===amt+' €')b.classList.add('pp-sel');});document.getElementById('pp-custom').value='';}
-function ppSelectCustom(val){var n=parseFloat(val);if(n>0){ppAmount=n;ppUpdateLink();document.querySelectorAll('.pp-amt').forEach(function(b){b.classList.remove('pp-sel');});}}
-function ppUpdateLink(){document.getElementById('pp-go').href='https://paypal.me/SaschaRothenburg/'+ppAmount+'EUR';document.getElementById('pp-label').textContent=ppAmount+' €';}
-document.addEventListener('click',function(e){if(ppOpen&&!document.getElementById('pp-widget').contains(e.target)){ppOpen=false;document.getElementById('pp-panel').style.display='none';document.getElementById('pp-btn').style.transform='scale(1)';}});
-</script>
+
 </body>
 </html>
