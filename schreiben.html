@@ -289,6 +289,60 @@ input, textarea { -webkit-user-select:text; user-select:text; }
   <div class="app-header">
     <h1>✏️ Schreibübung</h1>
     <p>© 2026 Sascha Rothenburg · Grundschrift von Christian Urff</p>
+<div style="display:flex;gap:8px;margin-top:6px;align-items:center"><a href="index.html" style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-family:Nunito,sans-serif;font-size:.72rem;font-weight:800;text-decoration:none">&#x2190; Startseite</a><style>
+.pp-wrap { position:relative; display:inline-block; }
+.pp-bubble {
+  display:none; position:absolute; top:calc(100% + 8px); left:0;
+  background:#fff; border-radius:16px; padding:14px;
+  box-shadow:0 8px 28px rgba(0,0,0,.18); width:210px; z-index:9999;
+  animation:ppIn .2s ease;
+}
+.pp-bubble::before {
+  content:''; position:absolute; top:-6px; left:18px;
+  width:12px; height:12px; background:#fff;
+  transform:rotate(45deg); box-shadow:-2px -2px 4px rgba(0,0,0,.06);
+}
+.pp-bubble.open { display:block; }
+@keyframes ppIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+.pp-amts { display:flex; gap:5px; margin:8px 0; }
+.pp-a { flex:1; padding:6px 2px; border-radius:9px; border:2px solid #e2e8f0;
+         background:#f8fafc; font-family:Nunito,sans-serif; font-size:.78rem;
+         font-weight:800; color:#1e1b4b; cursor:pointer; transition:all .15s; }
+.pp-a.sel { background:#0070ba; color:#fff; border-color:#0070ba; }
+.pp-inp { width:100%; padding:6px 9px; border:2px solid #e2e8f0; border-radius:9px;
+          font-family:Nunito,sans-serif; font-size:.8rem; font-weight:600;
+          color:#1e1b4b; outline:none; margin-bottom:8px; }
+.pp-inp:focus { border-color:#0070ba; }
+.pp-go { display:flex; align-items:center; justify-content:center; gap:6px;
+         padding:9px; border-radius:10px; background:#0070ba; color:#fff;
+         font-weight:800; font-size:.85rem; text-decoration:none;
+         box-shadow:0 3px 10px rgba(0,112,186,.3); }
+.pp-note { font-size:.62rem; color:#94a3b8; text-align:center; margin-top:6px; }
+</style><div class="pp-wrap" id="ppWrap">
+  <a href="#" onclick="ppToggle(event)" style="display:inline-flex;align-items:center;gap:5px;padding:4px 11px;background:rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-family:Nunito,sans-serif;font-size:.72rem;font-weight:800;text-decoration:none">&#x2615; Coffee</a>
+  <div class="pp-bubble" id="ppBubble">
+    <div style="font-weight:900;font-size:.88rem;color:#1e1b4b;text-align:center;margin-bottom:4px">&#x2615; Buy me a Coffee</div>
+    <div class="pp-amts">
+      <button class="pp-a" onclick="ppAmt(1)">1&euro;</button>
+      <button class="pp-a sel" onclick="ppAmt(2)">2&euro;</button>
+      <button class="pp-a" onclick="ppAmt(5)">5&euro;</button>
+      <button class="pp-a" onclick="ppAmt(10)">10&euro;</button>
+    </div>
+    <input class="pp-inp" id="ppCustom" type="number" min="1" placeholder="Eigener Betrag &euro;" oninput="ppCustom(this.value)">
+    <a class="pp-go" id="ppGo" href="https://paypal.me/SaschaRothenburg/2EUR" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c1.379 8.741-5.832 9.76-8.084 9.76H9.942L8.684 23h3.603c.458 0 .848-.333.92-.786l.038-.199.733-4.64.047-.256a.932.932 0 0 1 .92-.786h.579c3.754 0 6.694-1.525 7.552-5.933.36-1.847.174-3.389-.854-4.483z"/></svg>
+      Jetzt <span id="ppLbl">2&euro;</span> spenden
+    </a>
+    <div class="pp-note">via PayPal &middot; 0% Geb&uuml;hren</div>
+  </div>
+</div>
+<script>
+var ppAm=2;
+function ppToggle(e){e.preventDefault();document.getElementById('ppBubble').classList.toggle('open');}
+function ppAmt(n){ppAm=n;document.getElementById('ppGo').href='https://paypal.me/SaschaRothenburg/'+n+'EUR';document.getElementById('ppLbl').textContent=n+'€';document.querySelectorAll('.pp-a').forEach(function(b){b.classList.remove('sel');if(b.textContent.trim()===n+'€')b.classList.add('sel');});document.getElementById('ppCustom').value='';}
+function ppCustom(v){var n=parseFloat(v);if(n>0){ppAm=n;document.getElementById('ppGo').href='https://paypal.me/SaschaRothenburg/'+n+'EUR';document.getElementById('ppLbl').textContent=n+'€';document.querySelectorAll('.pp-a').forEach(function(b){b.classList.remove('sel');});}}
+document.addEventListener('click',function(e){var w=document.getElementById('ppWrap');if(w&&!w.contains(e.target))document.getElementById('ppBubble').classList.remove('open');});
+</script></div>
   <a href="index.html" style="display:inline-block;margin-top:6px;padding:4px 12px;background:rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-family:Nunito,sans-serif;font-size:.72rem;font-weight:800;text-decoration:none">&#x2190; Startseite</a>
   </div>
 
