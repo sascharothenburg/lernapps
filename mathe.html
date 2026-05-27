@@ -171,35 +171,20 @@ input,textarea { -webkit-user-select:text; user-select:text; }
     <h1>🔢 Mathe-Aufgaben</h1>
     <p>© 2026 Sascha Rothenburg · Grundschrift von Christian Urff</p>
 <div style="display:flex;gap:8px;margin-top:6px;align-items:center"><a href="index.html" style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-family:Nunito,sans-serif;font-size:.72rem;font-weight:800;text-decoration:none">&#x2190; Startseite</a><style>
-.pp-wrap { position:relative; display:inline-block; }
-.pp-bubble {
-  display:none; position:absolute; top:calc(100% + 8px); left:0;
-  background:#fff; border-radius:16px; padding:14px;
-  box-shadow:0 8px 28px rgba(0,0,0,.18); width:210px; z-index:9999;
-  animation:ppIn .2s ease;
-}
-.pp-bubble::before {
-  content:''; position:absolute; top:-6px; left:18px;
-  width:12px; height:12px; background:#fff;
-  transform:rotate(45deg); box-shadow:-2px -2px 4px rgba(0,0,0,.06);
-}
-.pp-bubble.open { display:block; }
-@keyframes ppIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
-.pp-amts { display:flex; gap:5px; margin:8px 0; }
-.pp-a { flex:1; padding:6px 2px; border-radius:9px; border:2px solid #e2e8f0;
-         background:#f8fafc; font-family:Nunito,sans-serif; font-size:.78rem;
-         font-weight:800; color:#1e1b4b; cursor:pointer; transition:all .15s; }
-.pp-a.sel { background:#0070ba; color:#fff; border-color:#0070ba; }
-.pp-inp { width:100%; padding:6px 9px; border:2px solid #e2e8f0; border-radius:9px;
-          font-family:Nunito,sans-serif; font-size:.8rem; font-weight:600;
-          color:#1e1b4b; outline:none; margin-bottom:8px; }
-.pp-inp:focus { border-color:#0070ba; }
-.pp-go { display:flex; align-items:center; justify-content:center; gap:6px;
-         padding:9px; border-radius:10px; background:#0070ba; color:#fff;
-         font-weight:800; font-size:.85rem; text-decoration:none;
-         box-shadow:0 3px 10px rgba(0,112,186,.3); }
-.pp-note { font-size:.62rem; color:#94a3b8; text-align:center; margin-top:6px; }
-</style><div class="pp-wrap" id="ppWrap">
+.pp-wrap{position:relative;display:inline-block}
+.pp-bubble{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;border-radius:16px;padding:14px;box-shadow:0 8px 28px rgba(0,0,0,.18);width:210px;z-index:9999;animation:ppIn .2s ease}
+.pp-bubble::before{content:'';position:absolute;top:-6px;left:18px;width:12px;height:12px;background:#fff;transform:rotate(45deg);box-shadow:-2px -2px 4px rgba(0,0,0,.06)}
+.pp-bubble.open{display:block}
+@keyframes ppIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.pp-amts{display:flex;gap:5px;margin:8px 0}
+.pp-a{flex:1;padding:6px 2px;border-radius:9px;border:2px solid #e2e8f0;background:#f8fafc;font-family:Nunito,sans-serif;font-size:.78rem;font-weight:800;color:#1e1b4b;cursor:pointer;transition:all .15s}
+.pp-a.sel{background:#0070ba;color:#fff;border-color:#0070ba}
+.pp-inp{width:100%;padding:6px 9px;border:2px solid #e2e8f0;border-radius:9px;font-family:Nunito,sans-serif;font-size:.8rem;font-weight:600;color:#1e1b4b;outline:none;margin-bottom:8px}
+.pp-inp:focus{border-color:#0070ba}
+.pp-go{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border-radius:10px;background:#0070ba;color:#fff;font-weight:800;font-size:.85rem;text-decoration:none;box-shadow:0 3px 10px rgba(0,112,186,.3)}
+.pp-note{font-size:.62rem;color:#94a3b8;text-align:center;margin-top:6px}
+</style>
+<div class="pp-wrap" id="ppWrap">
   <a href="#" onclick="ppToggle(event)" style="display:inline-flex;align-items:center;gap:5px;padding:4px 11px;background:rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-family:Nunito,sans-serif;font-size:.72rem;font-weight:800;text-decoration:none">&#x2615; Coffee</a>
   <div class="pp-bubble" id="ppBubble">
     <div style="font-weight:900;font-size:.88rem;color:#1e1b4b;text-align:center;margin-bottom:4px">&#x2615; Buy me a Coffee</div>
@@ -218,13 +203,13 @@ input,textarea { -webkit-user-select:text; user-select:text; }
   </div>
 </div>
 <script>
-var ppAm=2;
 function ppToggle(e){e.preventDefault();document.getElementById('ppBubble').classList.toggle('open');}
-function ppAmt(n){ppAm=n;document.getElementById('ppGo').href='https://paypal.me/SaschaRothenburg/'+n+'EUR';document.getElementById('ppLbl').textContent=n+'€';document.querySelectorAll('.pp-a').forEach(function(b){b.classList.remove('sel');if(b.textContent.trim()===n+'€')b.classList.add('sel');});document.getElementById('ppCustom').value='';}
-function ppCustom(v){var n=parseFloat(v);if(n>0){ppAm=n;document.getElementById('ppGo').href='https://paypal.me/SaschaRothenburg/'+n+'EUR';document.getElementById('ppLbl').textContent=n+'€';document.querySelectorAll('.pp-a').forEach(function(b){b.classList.remove('sel');});}}
+function ppAmt(n){document.getElementById('ppGo').href='https://paypal.me/SaschaRothenburg/'+n+'EUR';document.getElementById('ppLbl').textContent=n+'€';document.querySelectorAll('.pp-a').forEach(function(b){b.classList.remove('sel');if(b.textContent.trim()===n+'€')b.classList.add('sel');});document.getElementById('ppCustom').value='';}
+function ppCustom(v){var n=parseFloat(v);if(n>0){document.getElementById('ppGo').href='https://paypal.me/SaschaRothenburg/'+n+'EUR';document.getElementById('ppLbl').textContent=n+'€';document.querySelectorAll('.pp-a').forEach(function(b){b.classList.remove('sel');});}}
 document.addEventListener('click',function(e){var w=document.getElementById('ppWrap');if(w&&!w.contains(e.target))document.getElementById('ppBubble').classList.remove('open');});
 </script></div>
-  <a href="index.html" style="display:inline-block;margin-top:6px;padding:4px 12px;background:rgba(255,255,255,0.25);border-radius:20px;color:#fff;font-family:Nunito,sans-serif;font-size:.72rem;font-weight:800;text-decoration:none">&#x2190; Startseite</a>
+
+  
   </div>
 
   <div class="tabs">
