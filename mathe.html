@@ -712,8 +712,8 @@ initGenChips();
 renderProbList();
 </script>
 
-<div id="pp-widget" style="position:fixed;bottom:20px;left:20px;z-index:99999;font-family:Nunito,sans-serif">
-  <div id="pp-panel" style="display:none;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);margin-bottom:10px;width:220px;animation:ppSlideUp .25s ease">
+<div id="pp-widget" style="position:fixed;bottom:calc(90px + env(safe-area-inset-bottom,0px));right:16px;left:auto;z-index:99999;font-family:Nunito,sans-serif">
+  <div id="pp-panel" style="display:none;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);margin-bottom:10px;width:220px;animation:ppSlideUp .25s ease;align-self:flex-end">
     <div style="font-weight:900;font-size:.95rem;color:#1e1b4b;text-align:center">&#x2615; Buy me a Coffee</div>
     <div style="font-size:.75rem;color:#6b7280;text-align:center">Betrag w&auml;hlen:</div>
     <div style="display:flex;gap:6px;justify-content:center">
