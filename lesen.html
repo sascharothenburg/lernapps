@@ -56,9 +56,6 @@ input{-webkit-user-select:text;user-select:text}
 @media print{.app,.sbar{display:none!important}.printarea{display:block!important}body{background:#fff}html,body{height:auto;overflow:visible}@page{size:A4 portrait;margin:12mm 14mm}}
 .printarea{display:none}
 /* Lesen-spezifisch */
-.fb{display:flex;gap:6px;margin-bottom:12px}
-.fbb{flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid #e2e8f0;background:#f0f9ff;font-family:Nunito,sans-serif;font-size:.72rem;font-weight:700;color:#6b7280;cursor:pointer}
-.fbb.active{background:#0369a1;border-color:#0369a1;color:#fff}
 .sl-list{display:flex;flex-direction:column;gap:8px}
 .sl-item{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:10px 13px;font-family:Grundschrift,sans-serif;font-weight:bold;font-size:1.05rem;color:#1e1b4b;line-height:1.4;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .sl-item button{background:none;border:none;color:#7dd3fc;font-size:1rem;cursor:pointer;padding:0;flex-shrink:0}
@@ -93,11 +90,6 @@ input{-webkit-user-select:text;user-select:text}
 <div class="screen active" id="s-gen">
   <div class="card">
     <h2>Einstellungen</h2>
-    <div class="fb">
-      <button class="fbb active" id="fb-all">Alle</button>
-      <button class="fbb" id="fb-j1">Klasse 1</button>
-      <button class="fbb" id="fb-j2">Klasse 2</button>
-    </div>
     <div style="margin-bottom:12px">
       <label style="font-size:.72rem;font-weight:800;color:#6b7280;text-transform:uppercase;display:block;margin-bottom:6px">Anzahl S&auml;tze</label>
       <div style="display:flex;align-items:center;gap:10px">
@@ -290,17 +282,13 @@ var SAETZE = {
   ]
 };
 
-var filter = 'all';
 var sentences = [];
 
 function rnd(a){return a[Math.floor(Math.random()*a.length)];}
 
 function getPools(maxW) {
   var result = [];
-  var klasse = ['j1','j2'];
-  if (filter==='j1') klasse=['j1'];
-  if (filter==='j2') klasse=['j2'];
-  klasse.forEach(function(k){
+  ['j1','j2'].forEach(function(k){
     for(var w=3;w<=maxW;w++){
       var key=k+'_'+w;
       if(SAETZE[key]) result=result.concat(SAETZE[key]);
@@ -431,15 +419,6 @@ document.getElementById('t-gen').addEventListener('click',function(){showTab('ge
 document.getElementById('t-list').addEventListener('click',function(){showTab('list');});
 document.getElementById('t-set').addEventListener('click',function(){showTab('set');});
 document.getElementById('t-pre').addEventListener('click',function(){showTab('pre');});
-
-/* ===== Filter ===== */
-['all','j1','j2'].forEach(function(f){
-  document.getElementById('fb-'+f).addEventListener('click',function(){
-    filter=f;
-    document.querySelectorAll('.fbb').forEach(function(b){b.classList.remove('active');});
-    this.classList.add('active');
-  });
-});
 
 /* ===== Sliders ===== */
 document.getElementById('sentCount').addEventListener('input',function(){document.getElementById('sentCountVal').textContent=this.value;});

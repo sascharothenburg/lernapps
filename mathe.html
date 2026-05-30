@@ -119,9 +119,10 @@ input{-webkit-user-select:text;user-select:text}
     <div style="margin-top:14px">
       <label class="blk" style="font-size:.72rem;font-weight:800;color:#6b7280;text-transform:uppercase;margin-bottom:6px;display:block">Anzahl Aufgaben</label>
       <div style="display:flex;align-items:center;gap:10px">
-        <input type="range" id="countSlider" min="4" max="24" step="2" value="12" style="flex:1;accent-color:#7c3aed" oninput="document.getElementById('countVal').textContent=this.value">
-        <strong id="countVal" style="color:#7c3aed;min-width:28px">12</strong>
+        <input type="range" id="countSlider" min="4" max="36" step="2" value="26" style="flex:1;accent-color:#7c3aed" oninput="document.getElementById('countVal').textContent=this.value">
+        <strong id="countVal" style="color:#7c3aed;min-width:28px">26</strong>
       </div>
+      <p style="font-size:.7rem;color:#6b7280;margin-top:6px">Tipp: Mit 2 Spalten passen bis zu 26 Aufgaben auf eine A4-Seite, einspaltig etwa 13.</p>
     </div>
     <div style="margin-top:12px">
       <label class="blk" style="font-size:.72rem;font-weight:800;color:#6b7280;text-transform:uppercase;margin-bottom:6px;display:block">K&#228;stchen f&#252;r</label>
@@ -359,7 +360,10 @@ function generateProblems(){
     }
     problems.push(left+' '+op+' '+right+' = '+res);
   }
-  customProbs=problems; renderProbList(); showTab('gen');
+  customProbs=problems;
+  renderProbList();
+  showTab('tasks');
+  var sc=document.getElementById('s-tasks'); if(sc) sc.scrollTop=0;
 }
 
 // UI helpers
@@ -379,7 +383,7 @@ function showTab(n){
     b1.style.cssText='flex:1;padding:13px 0;border-radius:12px;font-family:Nunito,sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;background:#f0f4f8;color:#6b7280;border:2px solid #e2e8f0';
     b2.style.cssText='flex:1;padding:13px 0;border-radius:12px;font-family:Nunito,sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none';
     b1.textContent='\u2190 Zur\u00fcck'; b2.textContent='Drucken / PDF';
-    b1.onclick=function(){showTab('gen');}; b2.onclick=doPrint;
+    b1.onclick=function(){showTab('tasks');}; b2.onclick=doPrint;
     sbar.appendChild(b1); sbar.appendChild(b2);
     setTimeout(buildPreview,50);
   }else{
